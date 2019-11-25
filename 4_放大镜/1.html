@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            float: left
+        }
+
+        #box {
+            width: 350px;
+            height: 350px;
+            border: 1px solid #000;
+            position: relative;
+        }
+
+        #box2 {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 125, 175, .5);
+            top: 0;
+            left: 0;
+            display: none;
+            cursor: move;
+        }
+
+        #box3 {
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+            display: none;
+        }
+
+        #img2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img src="./1.jpg" alt="" srcset="">
+        <div id="box2"></div>
+    </div>
+    <div id="box3">
+        <img id="img2" src="./2.jpg" alt="" srcset="">
+    </div>
+    <script>
+        box.onmouseover = function () {
+            box2.style.display = box3.style.display = 'block'; //划入的时候显示
+        }
+        box.onmouseout = function () {
+            box2.style.display = box3.style.display = 'none'; //划出的时候隐藏
+        }
+        let boxw = box.clientWidth; //获取盒子的宽度
+        let boxh = box.clientHeight; //获取盒子的高度
+        box.onmousemove = function (ev) {
+            let l = ev.clientX - box2.clientWidth/2;//计算box2的left值，让鼠标在盒子中央
+            let t = ev.clientY - box2.clientHeight/2;//计算box2的top值，让鼠标在盒子中央
+            if(l<0){
+                l = 0;
+            }else if(l>boxw-box2.clientWidth){//if判断设置一个范围，不让小盒子超出范围
+                l = boxw - box2.clirntWidth; 
+            }
+            if(t<0){
+                t=0;
+            }else if(t>boxh - box2.clientHeight){
+                t = boxh - box2.clientHeight;
+            }
+            let sclecX = (ev.pageX - box2.clientWidth)/(boxw - box2.clientWidth);//计算出鼠标与box与box2之间距离的比例
+            console.log(ev.pageX-box2.clientWidth,boxw - box2.clientWidth)
+            let sclecY = (ev.pageY - box2.clientHeight)/(boxh - box2.clientHeight);
+            img2.style.left = sclecX * (box3.clientWidth - img2.offsetWidth) + 'px' //让box3的宽度 - img2的宽度乘以这个比例
+            img2.style.top = sclecY * (box3.clientHeight - img2.offsetHeight) + 'px' 
+            box2.style.left = l + 'px';
+            box2.style.top = t + 'px';
+        }
+    </script>
+</body>
+
+</html>

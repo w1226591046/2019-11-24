@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #ul {
+            position: absolute;
+            width: 100px;
+            display: none;
+            top: 0;
+            left: 0;
+        }
+
+        #ul li {
+            border: 1px solid wheat;
+        }
+
+        li:hover {
+            background: sandybrown;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="ul">
+        <li>窗前明月光</li>
+        <li>疑是地上霜</li>
+        <li>举头望明月</li>
+        <li>低头思故乡</li>
+    </ul>
+    <a id="aa" href="www.baidu.com">百度</a>
+    <script>
+        /*
+        ev.stopPropagation:
+            不再派发事件,
+            终止事件在传播过程的捕获、目标处理或起泡阶段进一步传播。调用该方法后，该节点上处理该事件的处理程序将被调用，事件不再被分派到其他节点。
+
+         target: 
+            事件属性可返回事件的目标节点（ 触发该事件的节点）， 如生成事件的元素、 文档或窗口。
+
+             浏览器默认行为:
+            某些行为并不是人为做的，而且浏览器悄悄做的
+
+        DOM0的方式
+
+        要阻止默认行为要知道是什么事件触发的这种行为
+
+            ev.returnValue = false;  去阻止默认行为（灵活）
+            return false
+            ev.preventDefault();  (事件绑定的时候使用或者returnValue)
+
+        oncontextmenu 鼠标右键
+        */
+
+        // document.oncontextmenu = function (ev) {
+        //     // ul.style.dispaly = 'block';
+        //     ul.style.cssText = `display:block;top:${ev.clientY}px;left:${ev.clientX}px`;
+        //     return false
+        // }
+        // ul.onclick = function (ev) {
+        //     console.log(ev.target.innerHTML)
+        //     ev.stopPropagation();
+        //     ul.style.display = 'none';
+        // }
+        // document.onclick = function () {
+        //     ul.style.display = 'none';
+        // }
+            aa.addEventListener('click',function(ev){
+                ev.returnValue = false;
+                return false;
+                ev.preventDefault();
+            } )
+            let yan = true;
+            aa.onclick = function(){
+                if(!yan){
+                    return false;
+                }
+            }
+            
+    </script>
+</body>
+
+</html>
